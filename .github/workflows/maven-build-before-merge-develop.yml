@@ -9,11 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      DB_URL: ${{ secrets.DB_URL }}
-      DB_USER: ${{ secrets.DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
     services:
       postgres:
         image: postgres:latest
@@ -42,7 +37,15 @@ jobs:
           echo "DB_PASSWORD=${DB_PASSWORD}" >> $GITHUB_ENV
 
       - name: Build with Maven
-        run: mvn -B clean install -P test
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USER: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: mvn -B clean install
 
       - name: Run Tests
-        run: mvn test -P test
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USER: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: mvn test
