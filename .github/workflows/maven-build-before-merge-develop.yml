@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DB_URL: ${{ secrets.DB_URL }}test
+      DB_URL: ${{ secrets.DB_URL }}
       DB_USER: ${{ secrets.DB_USERNAME }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
@@ -18,7 +18,7 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: db_test
+          POSTGRES_DB: test
           POSTGRES_USER: ${{ secrets.DB_USERNAME }}
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ports:
