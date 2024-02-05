@@ -2,9 +2,7 @@ package br.com.nord.nordcrmapi.model;
 
 import br.com.nord.nordcrmapi.enums.PersonType;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +10,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
 
     @Id
@@ -23,7 +24,7 @@ public class Customer {
     private String fullName;
 
     @Column(nullable = false, unique = true)
-    private String cpf_cnpj;
+    private String cpfCnpj;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -35,7 +36,7 @@ public class Customer {
     @Column(nullable = false)
     private LocalDateTime bornDate;
 
-    @Column(nullable = false, unique = true)
-    private Long idAddress;
+    @OneToOne
+    private Address address;
 
 }
