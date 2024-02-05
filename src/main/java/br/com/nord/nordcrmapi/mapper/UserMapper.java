@@ -1,10 +1,10 @@
 package br.com.nord.nordcrmapi.mapper;
 
-import br.com.nord.nordcrmapi.mapper.request.UserGetRequest;
-import br.com.nord.nordcrmapi.mapper.request.UserPostRequest;
-import br.com.nord.nordcrmapi.mapper.request.UserPutRequest;
-import br.com.nord.nordcrmapi.mapper.response.UserGetResponse;
-import br.com.nord.nordcrmapi.mapper.response.UserPostResponse;
+import br.com.nord.nordcrmapi.mapper.request.user.UserGetRequest;
+import br.com.nord.nordcrmapi.mapper.request.user.UserPostRequest;
+import br.com.nord.nordcrmapi.mapper.request.user.UserPutRequest;
+import br.com.nord.nordcrmapi.mapper.response.user.UserGetResponse;
+import br.com.nord.nordcrmapi.mapper.response.user.UserPostResponse;
 import br.com.nord.nordcrmapi.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,11 +1,12 @@
 package br.com.nord.nordcrmapi.controller;
 
 import br.com.nord.nordcrmapi.mapper.UserMapper;
-import br.com.nord.nordcrmapi.mapper.request.UserGetRequest;
-import br.com.nord.nordcrmapi.mapper.request.UserPostRequest;
-import br.com.nord.nordcrmapi.mapper.response.UserGetResponse;
-import br.com.nord.nordcrmapi.mapper.response.UserPostResponse;
+import br.com.nord.nordcrmapi.mapper.request.user.UserPostRequest;
+import br.com.nord.nordcrmapi.mapper.request.user.UserPutRequest;
+import br.com.nord.nordcrmapi.mapper.response.user.UserGetResponse;
+import br.com.nord.nordcrmapi.mapper.response.user.UserPostResponse;
 import br.com.nord.nordcrmapi.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,21 +20,28 @@ public class UserController {
     private final UserMapper mapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserGetResponse> findUserById(@PathVariable Long id) {
+    public ResponseEntity<UserGetResponse> findById(@PathVariable Long id) {
         var userFound = userService.findById(id);
-        var convertedUser = mapper.userToGetResponse(userFound);
-        return ResponseEntity.ok(convertedUser);
+        var userConverted = mapper.userToGetResponse(userFound);
+        return ResponseEntity.ok(userConverted);
     }
 
     @PostMapping
-    public ResponseEntity<UserPostResponse> saveUser(@RequestBody UserPostRequest request) {
+    public ResponseEntity<UserPostResponse> save(@RequestBody @Valid UserPostRequest request) {
         var userSaved = userService.save(request);
-        var convertedUser = mapper.userToPostResponse(userSaved);
-        return ResponseEntity.ok(convertedUser);
+        var userConverted = mapper.userToPostResponse(userSaved);
+        return ResponseEntity.status(201).body(userConverted);
     }
 
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody UserPutRequest request) {
+        userService.update(request);
         return ResponseEntity.noContent().build();
     }
 
