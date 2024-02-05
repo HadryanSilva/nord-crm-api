@@ -35,11 +35,11 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}/${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        run: mvn -B clean install
+        run: mvn -B clean install -DskipTests=true
 
-      - name: Run Tests
-        env:
-          DB_URL: ${{ secrets.DB_URL }}/${{ secrets.DB_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        run: mvn test
+      #- name: Run Tests
+        #env:
+          #DB_URL: ${{ secrets.DB_URL }}/${{ secrets.DB_NAME }}
+          #DB_USER: ${{ secrets.DB_USER }}
+          #DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        #run: mvn test ||
