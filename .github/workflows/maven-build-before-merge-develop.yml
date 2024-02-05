@@ -9,11 +9,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: ${{ secrets.DB_URL }}${{ secrets.DB_NAME }}
+      DATABASE_USERNAME: ${{ secrets.DB_USER }}
+      DATABASE_PASSWORD: ${{ secrets.PASSWORD }}
+
     services:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: ${{ secrets.DB_URL }}
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
           POSTGRES_USER: ${{ secrets.DB_USER }}
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ports:
