@@ -30,13 +30,6 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Set up environment variables
-        run: |
-          echo "DB_URL=${DB_URL}" >> $GITHUB_ENV
-          echo "DB_NAME=${DB_NAME}" >> $GITHUB_ENV
-          echo "DB_USER=${DB_USER}" >> $GITHUB_ENV
-          echo "DB_PASSWORD=${DB_PASSWORD}" >> $GITHUB_ENV
-
       - name: Build with Maven
         env:
           DB_URL: ${{ secrets.DB_URL }}/${{ secrets.DB_NAME }}
