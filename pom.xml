@@ -22,6 +22,15 @@
 
 	<profiles>
 		<profile>
+			<id>prod</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
 			<id>test</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
