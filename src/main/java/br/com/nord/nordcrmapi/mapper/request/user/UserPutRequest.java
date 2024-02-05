@@ -1,4 +1,4 @@
-package br.com.nord.nordcrmapi.mapper.request;
+package br.com.nord.nordcrmapi.mapper.request.user;
 
 import br.com.nord.nordcrmapi.enums.UserRole;
 import lombok.Getter;
@@ -6,7 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserPostRequest {
+public class UserPutRequest {
+
+    private Long id;
 
     private String username;
 
@@ -14,6 +16,6 @@ public class UserPostRequest {
 
     private String email;
 
-    private String role;
+    private UserRole role;
 
 }
