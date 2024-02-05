@@ -13,7 +13,7 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: test
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
           POSTGRES_USER: ${{ secrets.DB_USER }}
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ports:
@@ -33,19 +33,20 @@ jobs:
       - name: Set up environment variables
         run: |
           echo "DB_URL=${DB_URL}" >> $GITHUB_ENV
+          echo "DB_NAME=${DB_NAME}" >> $GITHUB_ENV
           echo "DB_USER=${DB_USER}" >> $GITHUB_ENV
           echo "DB_PASSWORD=${DB_PASSWORD}" >> $GITHUB_ENV
 
       - name: Build with Maven
         env:
-          DB_URL: ${{ secrets.DB_URL }}
+          DB_URL: ${{ secrets.DB_URL }}/${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: mvn -B clean install
 
       - name: Run Tests
         env:
-          DB_URL: ${{ secrets.DB_URL }}
+          DB_URL: ${{ secrets.DB_URL }}/${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: mvn test
