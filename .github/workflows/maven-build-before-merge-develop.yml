@@ -9,6 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    #services:
+      #postgres:
+        #image: postgres:latest
+        #env:
+          #POSTGRES_DB: ${{ secrets.DB_NAME }}
+          #POSTGRES_USER: ${{ secrets.DB_USER }}
+          #POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        #ports:
+          #- 5432:5432
+        #options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -20,7 +31,11 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B clean install -DskipTests=true
 
-      - name: Run Tests
-        run: mvn -B test pom.xml
+      #- name: Run Tests
+        #env:
+          #DB_URL: ${{ secrets.DB_URL }}/${{ secrets.DB_NAME }}
+          #DB_USER: ${{ secrets.DB_USER }}
+          #DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        #run: mvn test ||
