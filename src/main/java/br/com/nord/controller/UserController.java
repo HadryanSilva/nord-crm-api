@@ -9,6 +9,7 @@ import br.com.nord.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,13 +28,15 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserPostResponse> save(@RequestBody @Valid UserPostRequest request) {
-        var userSaved = userService.save(request);
+    public ResponseEntity<UserPostResponse> create(@RequestBody @Valid UserPostRequest request) {
+        var userToSave = mapper.postToUser(request);
+        var userSaved = userService.save(userToSave);
         var userConverted = mapper.userToPostResponse(userSaved);
         return ResponseEntity.status(201).body(userConverted);
     }
 
     @DeleteMapping("/{id}")
+    @Secured("ADMIN")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
@@ -41,7 +44,8 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody UserPutRequest request) {
-        userService.update(request);
+        var userToUpdate = mapper.putToUser(request);
+        userService.update(userToUpdate);
         return ResponseEntity.noContent().build();
     }
 

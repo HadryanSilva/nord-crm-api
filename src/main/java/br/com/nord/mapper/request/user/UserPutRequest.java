@@ -1,6 +1,5 @@
 package br.com.nord.mapper.request.user;
 
-import br.com.nord.enums.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +15,6 @@ public class UserPutRequest {
 
     private String email;
 
-    private UserRole role;
+    private String role;
 
 }
