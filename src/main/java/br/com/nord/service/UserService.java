@@ -1,9 +1,6 @@
 package br.com.nord.service;
 
 import br.com.nord.exception.NotFoundException;
-import br.com.nord.mapper.UserMapper;
-import br.com.nord.mapper.request.user.UserPostRequest;
-import br.com.nord.mapper.request.user.UserPutRequest;
 import br.com.nord.model.User;
 import br.com.nord.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +13,15 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper mapper;
 
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
-    public User save(UserPostRequest request) {
+    public User save(User user) {
         log.info("Saving user");
-        var userToSave = mapper.postToUser(request);
-        return userRepository.save(userToSave);
+        return userRepository.save(user);
     }
 
     public void delete(Long id) {
@@ -36,15 +31,21 @@ public class UserService {
         log.info("User with id {} deleted successfully", id);
     }
 
-    public void update(UserPutRequest request) {
-        log.info("Updating user with id {}", request.getId());
-        var userToUpdate = mapper.putToUser(request);
-        assertUserExists(userToUpdate);
+    public void update(User partialUserToUpdate) {
+        log.info("Updating user with id {}", partialUserToUpdate.getId());
+        var savedUser = findById(partialUserToUpdate.getId());
+        assertUserIsUnique(partialUserToUpdate);
+
+        var password = partialUserToUpdate.getPassword() == null ? savedUser.getPassword() : partialUserToUpdate.getPassword();
+        var roles = savedUser.getRoles();
+
+        var userToUpdate = partialUserToUpdate.withRoles(roles).withPassword(password);
+
         userRepository.save(userToUpdate);
         log.info("User updated successfully");
     }
 
-    private void assertUserExists(User user) {
+    private void assertUserIsUnique(User user) {
         findById(user.getId());
     }
 

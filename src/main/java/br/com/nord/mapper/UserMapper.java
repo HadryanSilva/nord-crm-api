@@ -1,5 +1,6 @@
 package br.com.nord.mapper;
 
+import br.com.nord.annotation.EncodedMapping;
 import br.com.nord.mapper.request.user.UserGetRequest;
 import br.com.nord.mapper.request.user.UserPostRequest;
 import br.com.nord.mapper.request.user.UserPutRequest;
@@ -8,18 +9,22 @@ import br.com.nord.mapper.response.user.UserPostResponse;
 import br.com.nord.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = PasswordEncoderMapper.class)
 public interface UserMapper {
 
-    @Mapping(target = "role", expression = "java(br.com.nord.enums.UserRole.fromString(request.getRole()))")
+    @Mapping(target = "password", qualifiedBy = EncodedMapping.class)
     User postToUser(UserPostRequest request);
-
     User getToUser(UserGetRequest request);
 
-    UserGetRequest userToGetRequest(User user);
-
+    @Mapping(target = "password", qualifiedBy = EncodedMapping.class)
     User putToUser(UserPutRequest request);
+
+    UserGetRequest userToGetRequest(User user);
 
     UserGetResponse userToGetResponse(User user);
 
