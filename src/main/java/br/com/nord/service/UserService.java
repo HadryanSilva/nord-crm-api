@@ -34,7 +34,7 @@ public class UserService {
     public void update(User partialUserToUpdate) {
         log.info("Updating user with id {}", partialUserToUpdate.getId());
         var savedUser = findById(partialUserToUpdate.getId());
-        assertUserIsUnique(partialUserToUpdate);
+        assertUserExists(partialUserToUpdate);
 
         var password = partialUserToUpdate.getPassword() == null ? savedUser.getPassword() : partialUserToUpdate.getPassword();
         var roles = savedUser.getRoles();
@@ -45,7 +45,7 @@ public class UserService {
         log.info("User updated successfully");
     }
 
-    private void assertUserIsUnique(User user) {
+    private void assertUserExists(User user) {
         findById(user.getId());
     }
 

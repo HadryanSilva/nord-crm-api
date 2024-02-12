@@ -3,7 +3,7 @@ package br.com.nord.controller;
 import br.com.nord.mapper.record.LoginResponse;
 import br.com.nord.mapper.request.user.UserLoginPostRequest;
 import br.com.nord.model.User;
-import br.com.nord.service.JwtService;
+import br.com.nord.service.auth.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

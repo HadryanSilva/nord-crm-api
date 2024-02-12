@@ -1,7 +1,7 @@
 package br.com.nord.config;
 
 import br.com.nord.repository.UserRepository;
-import br.com.nord.service.JwtService;
+import br.com.nord.service.auth.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
