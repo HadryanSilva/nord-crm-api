@@ -1,3 +1,7 @@
 logging:
   level:
     root: debug
+api:
+  security:
+    jwt:
+      secret: ${TOKEN_SECRET:"myTestSecretKey"}
