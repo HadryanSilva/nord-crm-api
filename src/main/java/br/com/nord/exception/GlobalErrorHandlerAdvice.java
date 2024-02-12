@@ -1,7 +1,9 @@
 package br.com.nord.exception;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +21,18 @@ public class GlobalErrorHandlerAdvice {
     public ResponseEntity<DefaultErrorMessage> handleNotFoundException(MethodArgumentNotValidException ex) {
         var defaultMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
         var errorResponse = new DefaultErrorMessage(HttpStatus.BAD_REQUEST.value(), defaultMessage);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<DefaultErrorMessage> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        var errorResponse = new DefaultErrorMessage(HttpStatus.FORBIDDEN.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
+    }
+
+    @ExceptionHandler(JWTDecodeException.class)
+    public ResponseEntity<DefaultErrorMessage> handleJWTDecodeException(JWTDecodeException ex) {
+        var errorResponse = new DefaultErrorMessage(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
