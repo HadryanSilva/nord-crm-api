@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private static final String[] AUTH_WHITELIST = {
-        "/auth/**",
         "/configuration/ui",
         "/csrf",
         "/configuration/security",
@@ -36,6 +35,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers(AUTH_WHITELIST).permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/user").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/api/v1/user").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/user/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
