@@ -2,6 +2,7 @@ package br.com.nord.controller;
 
 import br.com.nord.mapper.CustomerMapper;
 import br.com.nord.mapper.request.customer.CustomerPostRequest;
+import br.com.nord.mapper.request.customer.CustomerPutRequest;
 import br.com.nord.mapper.response.customer.CustomerGetResponse;
 import br.com.nord.mapper.response.customer.CustomerPostResponse;
 import br.com.nord.service.CustomerService;
@@ -39,8 +40,8 @@ public class CustomerController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(CustomerPostRequest request) {
-        var customerConverted = mapper.postToCustomer(request);
+    public ResponseEntity<Void> update(@RequestBody CustomerPutRequest request) {
+        var customerConverted = mapper.putToCustomer(request);
         customerService.update(customerConverted);
         return ResponseEntity.noContent().build();
     }

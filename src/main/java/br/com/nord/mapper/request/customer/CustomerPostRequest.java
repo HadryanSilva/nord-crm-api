@@ -24,7 +24,6 @@ public class CustomerPostRequest {
     @NotBlank(message = "Person Type cannot be empty")
     private String personType;
 
-    @NotBlank(message = "Born Date cannot be empty")
     private LocalDateTime bornDate;
 
     private Address address;

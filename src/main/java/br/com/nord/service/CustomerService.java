@@ -32,14 +32,13 @@ public class CustomerService {
     }
 
     public void update(Customer customer) {
-        var customerFound = findById(customer.getId());
         assertCustomerExists(customer);
         log.info("Updating customer with id {}", customer.getId());
-        repository.save(customerFound);
+        repository.save(customer);
         log.info("Customer with id {} updated successfully", customer.getId());
     }
 
-    public void assertCustomerExists(Customer customer) {
+    private void assertCustomerExists(Customer customer) {
         findById(customer.getId());
     }
 
