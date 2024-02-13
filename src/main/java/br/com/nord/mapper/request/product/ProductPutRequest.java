@@ -13,7 +13,7 @@ public class ProductPutRequest {
 
     private String supplier;
 
-    private String productCategory;
+    private String category;
 
     private String description;
 

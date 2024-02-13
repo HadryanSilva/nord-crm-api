@@ -1,9 +1,6 @@
 package br.com.nord.service;
 
 import br.com.nord.exception.NotFoundException;
-import br.com.nord.mapper.ProductMapper;
-import br.com.nord.mapper.request.product.ProductPostRequest;
-import br.com.nord.mapper.request.product.ProductPutRequest;
 import br.com.nord.model.Product;
 import br.com.nord.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,16 +13,14 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     private final ProductRepository repository;
-    private final ProductMapper mapper;
 
     public Product findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
-    public Product save(ProductPostRequest request) {
+    public Product save(Product productToSave) {
         log.info("Saving product");
-        var productToSave = mapper.postToProduct(request);
         return repository.save(productToSave);
     }
 
@@ -36,10 +31,9 @@ public class ProductService {
         log.info("Product deleted successfully");
     }
 
-    public void update(ProductPutRequest request) {
-        var productToUpdate = mapper.putToProduct(request);
+    public void update(Product productToUpdate) {
         assertProductExists(productToUpdate);
-        log.info("Updating product with id {}", request.getId());
+        log.info("Updating product with id {}", productToUpdate.getId());
         repository.save(productToUpdate);
         log.info("Product updated successfully");
     }

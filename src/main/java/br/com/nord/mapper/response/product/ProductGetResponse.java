@@ -1,6 +1,5 @@
 package br.com.nord.mapper.response.product;
 
-import br.com.nord.enums.ProductCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,7 @@ public class ProductGetResponse {
 
     private String supplier;
 
-    private ProductCategory productCategory;
+    private String category;
 
     private String description;
 
