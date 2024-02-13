@@ -36,7 +36,7 @@ public class Customer {
     @Column(nullable = false)
     private LocalDateTime bornDate;
 
-    @OneToOne
+    @Embedded
     private Address address;
 
 }

@@ -1,4 +1,4 @@
-package br.com.nord.service;
+package br.com.nord.service.auth;
 
 import br.com.nord.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

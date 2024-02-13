@@ -5,7 +5,7 @@ import br.com.nord.mapper.request.user.UserPostRequest;
 import br.com.nord.mapper.request.user.UserPutRequest;
 import br.com.nord.mapper.response.user.UserGetResponse;
 import br.com.nord.mapper.response.user.UserPostResponse;
-import br.com.nord.service.JwtService;
+import br.com.nord.service.auth.JwtService;
 import br.com.nord.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

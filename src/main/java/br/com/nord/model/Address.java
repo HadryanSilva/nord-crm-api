@@ -3,7 +3,7 @@ package br.com.nord.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+@Embeddable
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -11,11 +11,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private Long id;
 
     @Column(nullable = false)
     private String zipCode;

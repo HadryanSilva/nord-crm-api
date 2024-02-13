@@ -36,4 +36,10 @@ public class GlobalErrorHandlerAdvice {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
+    @ExceptionHandler(TokenCreationException.class)
+    public ResponseEntity<DefaultErrorMessage> handleJWTDecodeException(TokenCreationException ex) {
+        var errorResponse = new DefaultErrorMessage(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
 }
