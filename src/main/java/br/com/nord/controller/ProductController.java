@@ -27,7 +27,8 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductPostResponse> save(@RequestBody ProductPostRequest request) {
-        var userSaved = service.save(request);
+        var userToSave = mapper.postToProduct(request);
+        var userSaved = service.save(userToSave);
         var userConverted = mapper.productToPostResponse(userSaved);
         return ResponseEntity.status(201).body(userConverted);
     }
@@ -40,7 +41,8 @@ public class ProductController {
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody ProductPutRequest request) {
-        service.update(request);
+        var productToUpdate = mapper.putToProduct(request);
+        service.update(productToUpdate);
         return ResponseEntity.noContent().build();
     }
 

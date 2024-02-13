@@ -11,7 +11,7 @@ public class ProductPostRequest {
 
     private String supplier;
 
-    private String productCategory;
+    private String category;
 
     private String description;
 
