@@ -7,6 +7,8 @@ import br.com.nord.mapper.response.product.ProductPostResponse;
 import br.com.nord.model.Product;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
@@ -17,5 +19,7 @@ public interface ProductMapper {
     ProductGetResponse productToGetResponse(Product product);
 
     ProductPostResponse productToPostResponse(Product product);
+
+    List<ProductGetResponse> productToGetResponseList(List<Product> products);
 
 }

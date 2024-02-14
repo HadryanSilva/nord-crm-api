@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = {"/api/v1/product", "/api/v1/product/"})
 @RequiredArgsConstructor
@@ -17,6 +19,13 @@ public class ProductController {
 
     private final ProductService service;
     private final ProductMapper mapper;
+
+    @GetMapping
+    public ResponseEntity<List<ProductGetResponse>> findAll() {
+        var products = service.findAll();
+        var convertedList = mapper.productToGetResponseList(products);
+        return ResponseEntity.ok(convertedList);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductGetResponse> findById(@PathVariable Long id) {
