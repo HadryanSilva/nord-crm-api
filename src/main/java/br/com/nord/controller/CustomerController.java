@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = {"/api/v1/customer", "/api/v1/customer/"})
 @RequiredArgsConstructor
@@ -18,6 +20,13 @@ public class CustomerController {
 
     private final CustomerService customerService;
     private final CustomerMapper mapper;
+
+    @GetMapping
+    public ResponseEntity<List<CustomerGetResponse>> findAll() {
+        var customers = customerService.findAll();
+        var convertedList = mapper.customerToGetResponseList(customers);
+        return ResponseEntity.ok(convertedList);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CustomerGetResponse> findById(@PathVariable Long id) {

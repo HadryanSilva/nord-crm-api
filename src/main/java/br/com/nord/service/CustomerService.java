@@ -7,12 +7,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Log4j2
 public class CustomerService {
 
     private final CustomerRepository repository;
+
+    public List<Customer> findAll() {
+        return repository.findAll();
+    }
 
     public Customer findById(Long id) {
         return repository.findById(id)

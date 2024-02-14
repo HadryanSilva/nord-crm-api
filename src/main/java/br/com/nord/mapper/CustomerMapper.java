@@ -8,6 +8,8 @@ import br.com.nord.model.Address;
 import br.com.nord.model.Customer;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(uses = {Address.class}, componentModel = "spring")
 public interface CustomerMapper {
 
@@ -18,5 +20,7 @@ public interface CustomerMapper {
     CustomerPostResponse customerToPostResponse(Customer customer);
 
     CustomerGetResponse customerToGetResponse(Customer customer);
+
+    List<CustomerGetResponse> customerToGetResponseList(List<Customer> customers);
 
 }
