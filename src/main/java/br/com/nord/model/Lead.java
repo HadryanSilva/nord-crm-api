@@ -20,18 +20,18 @@ public class Lead {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @OneToOne
-    private Customer customer;
+    @Column(nullable = false)
+    private Long panelId;
 
-    @OneToOne
-    private Product product;
+    @Column(nullable = false)
+    private Long customerId;
+
+    @Column(nullable = false)
+    private Long productId;
 
     private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
     private LeadStatus status;
-
-    @OneToOne
-    private Panel panel;
 
 }

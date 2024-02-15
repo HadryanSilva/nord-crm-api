@@ -4,8 +4,6 @@ import br.com.nord.model.Address;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 public class CustomerPostResponse {
@@ -18,9 +16,9 @@ public class CustomerPostResponse {
 
     private String email;
 
-    private String personType;
+    private String phone;
 
-    private LocalDateTime bornDate;
+    private String personType;
 
     private Address address;
 
