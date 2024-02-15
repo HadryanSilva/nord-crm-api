@@ -8,13 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class LoginController {
 
@@ -25,7 +23,6 @@ public class LoginController {
     public ResponseEntity<LoginResponse> login(@RequestBody UserLoginPostRequest request) {
         var authCredentials = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
         var auth = authenticationManager.authenticate(authCredentials);
-
         var token = jwtService.generateToken((User) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginResponse(token));

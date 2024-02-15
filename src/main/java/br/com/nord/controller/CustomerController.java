@@ -49,7 +49,7 @@ public class CustomerController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody CustomerPutRequest request) {
+    public ResponseEntity<Void> update(@RequestBody @Valid CustomerPutRequest request) {
         var customerConverted = mapper.putToCustomer(request);
         customerService.update(customerConverted);
         return ResponseEntity.noContent().build();

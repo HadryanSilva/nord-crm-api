@@ -1,6 +1,5 @@
 package br.com.nord.service.auth;
 
-import br.com.nord.exception.TokenCreationException;
 import br.com.nord.model.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -30,7 +29,7 @@ public class JwtService {
                     .withExpiresAt(generateExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException | UnsupportedEncodingException e) {
-            throw new TokenCreationException("Error generating token");
+            return "";
         }
     }
 

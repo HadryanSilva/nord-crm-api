@@ -4,8 +4,6 @@ import br.com.nord.enums.PersonType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @Setter
@@ -27,14 +25,14 @@ public class Customer {
     private String cpfCnpj;
 
     @Column(nullable = false, unique = true)
+    private String phone;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PersonType personType;
-
-    @Column(nullable = false)
-    private LocalDateTime bornDate;
 
     @Embedded
     private Address address;
