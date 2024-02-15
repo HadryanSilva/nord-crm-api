@@ -1,17 +1,30 @@
 version: '3.8'
 
 services:
+  nord-crm-api:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - nord-crm-network
+
   postgres:
     image: postgres:latest
     container_name: postgres
     environment:
-      POSTGRES_DB: ${DB_NAME}${DB_PROPS}
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    #volumes:
+      #- postgres_data:/var/lib/postgresql/data
+    networks:
+      - nord-crm-network
 
-volumes:
-  postgres_data:
+networks:
+  nord-crm-network:
+    driver: bridge
