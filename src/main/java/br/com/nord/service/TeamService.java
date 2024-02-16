@@ -3,6 +3,8 @@ package br.com.nord.service;
 import br.com.nord.exception.NotFoundException;
 import br.com.nord.model.Team;
 import br.com.nord.repository.TeamRepository;
+import br.com.nord.repository.TeamUserRepository;
+import br.com.nord.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.List;
 public class TeamService {
 
     private final TeamRepository teamRepository;
+    private final UserRepository userRepository;
+    private final TeamUserRepository teamUserRepository;
 
     public List<Team> findAll() {
         return teamRepository.findAll();
