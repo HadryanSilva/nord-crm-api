@@ -3,11 +3,14 @@ package br.com.nord.controller;
 import br.com.nord.mapper.TeamMapper;
 import br.com.nord.mapper.request.team.TeamPostRequest;
 import br.com.nord.mapper.request.team.TeamPutRequest;
+import br.com.nord.mapper.response.team.TeamGetResponse;
 import br.com.nord.mapper.response.team.TeamPostResponse;
 import br.com.nord.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = {"/api/v1/team", "/api/v1/team/"})
@@ -16,6 +19,13 @@ public class TeamController {
 
     private final TeamService teamService;
     private final TeamMapper teamMapper;
+
+    @GetMapping
+    public ResponseEntity<List<TeamGetResponse>> findAll() {
+        var teams = teamService.findAll();
+        var convertedList = teamMapper.teamToGetResponseList(teams);
+        return ResponseEntity.ok(convertedList);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<TeamPostResponse> findById(@PathVariable Long id) {

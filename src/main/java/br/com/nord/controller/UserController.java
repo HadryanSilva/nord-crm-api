@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = {"/api/v1/user", "/api/v1/user/"})
 @RequiredArgsConstructor
@@ -24,6 +26,13 @@ public class UserController {
     private final UserService userService;
     private final UserMapper mapper;
     private final JwtService jwtService;
+
+    @GetMapping
+    public ResponseEntity<List<UserGetResponse>> findAll() {
+        var users = userService.findAll();
+        var convertedList = mapper.userToGetResponseList(users);
+        return ResponseEntity.ok(convertedList);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserGetResponse> findById(@PathVariable Long id) {
