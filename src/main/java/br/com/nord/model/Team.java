@@ -22,7 +22,12 @@ public class Team {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "team_user",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> members;
 
 }
