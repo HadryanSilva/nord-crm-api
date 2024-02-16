@@ -8,6 +8,8 @@ import br.com.nord.model.Team;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
+import java.util.List;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface TeamMapper {
 
@@ -15,5 +17,6 @@ public interface TeamMapper {
     TeamPostResponse teamToPostResponse(Team team);
     TeamGetResponse teamToGetResponse(Team team);
     Team putToTeam(TeamPutRequest request);
+    List<TeamGetResponse> teamToGetResponseList(List<Team> teams);
 
 }
