@@ -1,0 +1,2 @@
+CREATE DATABASE nord_crm_db;
+CREATE DATABASE keycloak;
