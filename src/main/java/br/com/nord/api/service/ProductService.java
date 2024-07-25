@@ -1,5 +1,6 @@
 package br.com.nord.api.service;
 
+import br.com.nord.api.exception.NotFoundException;
 import br.com.nord.api.mapper.ProductMapper;
 import br.com.nord.api.mapper.request.product.ProductPostRequest;
 import br.com.nord.api.mapper.response.product.ProductGetResponse;
@@ -44,7 +45,7 @@ public class ProductService {
     public void update(Long id, ProductPostRequest request) {
         log.info("Updating product with id: {}", id);
         Product product = productRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new NotFoundException("Product not found"));
         product.setName(request.getName());
         product.setSupplier(request.getSupplier());
         product.setCategory(ProductCategory.valueOf(request.getCategory()));

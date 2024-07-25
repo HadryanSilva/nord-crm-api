@@ -1,5 +1,6 @@
 package br.com.nord.api.service;
 
+import br.com.nord.api.exception.NotFoundException;
 import br.com.nord.api.mapper.UserMapper;
 import br.com.nord.api.mapper.request.user.UserPostRequest;
 import br.com.nord.api.mapper.response.user.UserGetResponse;
@@ -46,7 +47,7 @@ public class UserService {
     public void update(Long id, UserPostRequest request) {
         log.info("Updating user with id: {}", id);
         var user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
         user.setEmail(request.getEmail());

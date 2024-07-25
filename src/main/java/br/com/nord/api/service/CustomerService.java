@@ -1,5 +1,6 @@
 package br.com.nord.api.service;
 
+import br.com.nord.api.exception.NotFoundException;
 import br.com.nord.api.mapper.CustomerMapper;
 import br.com.nord.api.mapper.request.customer.CustomerPostRequest;
 import br.com.nord.api.mapper.response.customer.CustomerGetResponse;
@@ -42,7 +43,7 @@ public class CustomerService {
     public void update(Long id, CustomerPostRequest request) {
         log.info("Updating customer with id: {}", id);
         var customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new NotFoundException("Customer not found"));
         customer.setFullName(request.getFullName());
         customer.setCpf_cnpj(request.getCpf_cnpj());
         customer.setEmail(request.getEmail());
