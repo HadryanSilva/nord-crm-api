@@ -19,8 +19,8 @@ public class PanelController {
     private final PanelService panelService;
 
     @GetMapping
-    public ResponseEntity<List<PanelGetResponse>> findAll(@RequestParam("page") int page,
-                                                          @RequestParam("size") int size) {
+    public ResponseEntity<List<PanelGetResponse>> findAll(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(panelService.findAll(page, size));
     }
 
