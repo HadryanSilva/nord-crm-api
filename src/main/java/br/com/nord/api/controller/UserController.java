@@ -19,8 +19,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserGetResponse>> findAll(@RequestParam(defaultValue = "0") int page,
-                                                         @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<List<UserGetResponse>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                         @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(userService.findAll(page, size));
 
     }

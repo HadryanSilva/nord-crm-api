@@ -21,8 +21,8 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
-    public ResponseEntity<List<CustomerGetResponse>> findAll(@RequestParam(defaultValue = "0") int page,
-                                                             @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<List<CustomerGetResponse>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                             @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(customerService.findAll(page, size));
     }
 

@@ -19,8 +19,8 @@ public class LeadController {
     private final LeadService leadService;
 
     @GetMapping
-    public ResponseEntity<List<LeadGetResponse>> findAll(@RequestParam(defaultValue = "0") int page,
-                                                         @RequestParam(defaultValue = "10") int size) {
+    public ResponseEntity<List<LeadGetResponse>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                         @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(leadService.findAll(page, size));
     }
 
