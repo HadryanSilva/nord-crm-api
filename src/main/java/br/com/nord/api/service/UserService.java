@@ -31,6 +31,13 @@ public class UserService {
                 .toList();
     }
 
+    public UserGetResponse findById(Long id) {
+        log.info("Finding user with id: {}", id);
+        var userFound = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+        return userMapper.userToGetResponse(userFound);
+    }
+
     public UserPostResponse save(UserPostRequest request) {
         log.info("Saving user: {}", request);
         var userToSave = userMapper.postToUser(request);
